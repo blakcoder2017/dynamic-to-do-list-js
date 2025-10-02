@@ -4,40 +4,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const taskInput = document.getElementById("task-input");
     const taskList = document.getElementById("task-list");
 
-    // Function to add a new task
-    function addTask() {
-        // Get input value and trim whitespace
-        const taskText = taskInput.value.trim();
+   function addTask() {
+    const taskText = taskInput.value.trim();
 
-        // Check if input is empty
-        if (taskText === "") {
-            alert("Please enter a task!");
-            return;
-        }
-
-        // Create a new list item (li)
-        const li = document.createElement("li");
-        li.textContent = taskText;
-
-        // Create a remove button
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "Remove";
-        removeBtn.className = "remove-btn";
-
-        // Add event listener to remove task when button clicked
-        removeBtn.onclick = () => {
-            taskList.removeChild(li);
-        };
-
-        // Append remove button to li
-        li.appendChild(removeBtn);
-
-        // Append li to the task list
-        taskList.appendChild(li);
-
-        // Clear input field
-        taskInput.value = "";
+    if (taskText === "") {
+        alert("Please enter a task");
+        return;
     }
+
+    // Create list item
+    const li = document.createElement("li");
+    li.textContent = taskText;
+
+    // Create remove button
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.classList.add("remove-btn"); // ✅ use classList.add
+
+    // Remove task when button is clicked
+    removeButton.onclick = function () {
+        taskList.removeChild(li);
+    };
+
+    // Append button to li, then li to task list
+    li.appendChild(removeButton);
+    taskList.appendChild(li);
+
+    // Clear input
+    taskInput.value = "";
+}
 
     // Event listener for Add Task button
     addButton.addEventListener("click", addTask);
